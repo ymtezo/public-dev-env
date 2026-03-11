@@ -1,0 +1,31 @@
+// Chromiumソースコードへのパッチ
+// 検索機能を完全に無効化するための変更
+
+// ファイル: chrome/browser/ui/omnibox/omnibox_edit_controller.cc
+// 検索エンジンへのクエリ送信を無効化
+
+--- a/chrome/browser/ui/omnibox/omnibox_edit_controller.cc
++++ b/chrome/browser/ui/omnibox/omnibox_edit_controller.cc
+@@ -100,6 +100,10 @@ void OmniboxEditController::OnAutocompleteAccept(
+     const GURL& destination_url,
+     TemplateURLRef::PostContent* post_content,
+     WindowOpenDisposition disposition) {
++  // 検索クエリをブロック - URLのみ許可
++  if (!destination_url.SchemeIsHTTPOrHTTPS() && !destination_url.SchemeIsFile()) {
++    return;
++  }
+   
+   // 既存のコード...
+ }
+
+// ファイル: chrome/browser/ui/views/omnibox/omnibox_view_views.cc
+// 検索候補の表示を無効化
+
+--- a/chrome/browser/ui/views/omnibox/omnibox_view_views.cc
++++ b/chrome/browser/ui/views/omnibox/omnibox_view_views.cc
+@@ -200,6 +200,9 @@ void OmniboxViewViews::OnAfterPossibleChange(bool allow_keyword_ui_change) {
++  // 検索候補を表示しない
++  return;
++
+   // 既存のコード...
+ }

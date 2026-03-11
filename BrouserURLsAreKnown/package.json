@@ -1,0 +1,12 @@
+{
+  "name": "restricted-browser",
+  "version": "1.0.0",
+  "description": "ページ内遷移を制限するブラウザ拡張機能",
+  "scripts": {
+    "build": "echo 拡張機能のビルドが完了しました",
+    "install-extension": "echo Chrome/Braveで chrome://extensions を開き、デベロッパーモードを有効にして、このフォルダを読み込んでください"
+  },
+  "keywords": ["browser", "restriction", "navigation"],
+  "author": "",
+  "license": "MIT"
+}

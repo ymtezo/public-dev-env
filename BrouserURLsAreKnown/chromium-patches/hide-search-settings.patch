@@ -1,0 +1,23 @@
+// 設定UIから検索エンジン関連のオプションを削除
+
+// ファイル: chrome/browser/resources/settings/search_engines_page/search_engines_page.html
+// 検索エンジン設定ページを非表示
+
+--- a/chrome/browser/resources/settings/search_engines_page/search_engines_page.html
++++ b/chrome/browser/resources/settings/search_engines_page/search_engines_page.html
+@@ -1,5 +1,6 @@
+ <style include="settings-shared">
++  :host { display: none !important; }
+ </style>
+
+// ファイル: chrome/browser/ui/webui/settings/settings_ui.cc
+// 設定メニューから検索エンジン項目を削除
+
+--- a/chrome/browser/ui/webui/settings/settings_ui.cc
++++ b/chrome/browser/ui/webui/settings/settings_ui.cc
+@@ -150,7 +150,7 @@ void SettingsUI::AddSettingsPageUIHandler(
+   // 検索エンジン設定ハンドラを登録しない
+-  web_ui()->AddMessageHandler(
+-      std::make_unique<settings::SearchEnginesHandler>(profile));
++  // 検索エンジン設定を無効化
+ }

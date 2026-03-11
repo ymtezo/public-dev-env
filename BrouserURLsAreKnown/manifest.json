@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "制限付きブラウザ拡張機能",
+  "version": "1.0.0",
+  "description": "ページ内遷移を制限し、URL直接入力のみを許可するブラウザ拡張",
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "storage",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
